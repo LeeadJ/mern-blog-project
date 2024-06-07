@@ -4,18 +4,21 @@ body {
 
 img {
   max-width: 100%;
+  height: 100%;
 }
 
 main {
   padding: 10px;
-  max-width: 500px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
 header {
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
   margin-bottom: 15px;
+  align-items: center;
 }
 
 header a{
@@ -23,11 +26,43 @@ header a{
   color: inherit;
 }
 
-header a.logo {
+.logo {
   font-weight: bold;
+  font-size: 1.5rem;
 }
 
 header nav {
   display: flex;
   gap: 15px;
+}
+
+.post {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+
+.post .texts h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.info {
+  margin: 6px 0;
+  color: #888;
+  font-size: 0.7rem;
+  font-weight: bold;
+  display: flex;
+  gap: 10px;
+}
+
+.author{
+  color: #333;
+}
+
+.summary{
+  margin: 6px 0;
+  line-height: 1.4rem;
 }

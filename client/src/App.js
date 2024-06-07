@@ -1,6 +1,6 @@
 import './App.css';
 
-export default function App() {
+function App() {
   return (
     <main>
       <header>
@@ -11,20 +11,47 @@ export default function App() {
         </nav>
       </header>
       <div className="post">
-        <img src="https://media.dev.to/cdn-cgi/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fxtsjf89kaq9s9j35b7qf.png" alt=""></img>
-        <h2>How to write a technical blog post</h2>      
-        <p>Technical skill and content creation are equally important for your software development or career. Creating technical content can make it easier to land jobs, get promoted, and influence the direction of our industry because it enables hiring managers and other tech leaders to take a peek into your brain and your thought process.</p>
+        <div className="image">
+         <img src="https://techtowords.com/wp-content/uploads/2023/06/image-17.png" alt=""></img>
+        </div>
+        <div className="texts">
+          <h2>How to write a technical blog post</h2>    
+          <p className="info">
+            <a href="" className="author">Rizèl Scarlett</a>  
+            <time>Posted on Jun 7, 2023 • Updated on Jun 10, 2023</time>
+          </p>  
+          <p className="summary">Technical skill and content creation are equally important for your software development or career. Creating technical content can make it easier to land jobs, get promoted, and influence the direction of our industry because it enables hiring managers and other tech leaders to take a peek into your brain and your thought process.</p>
+        </div>
       </div>
       <div className="post">
-        <img src="https://media.dev.to/cdn-cgi/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fxtsjf89kaq9s9j35b7qf.png" alt=""></img>
-        <h2>How to write a technical blog post</h2>      
-        <p>Technical skill and content creation are equally important for your software development or career. Creating technical content can make it easier to land jobs, get promoted, and influence the direction of our industry because it enables hiring managers and other tech leaders to take a peek into your brain and your thought process.</p>
+        <div className="image">
+          <img src="https://techtowords.com/wp-content/uploads/2023/06/image-17.png" alt=""></img>
+        </div>
+        <div className="texts">
+          <h2>How to write a technical blog post</h2>    
+          <p className="info">
+            <a href="" className="author">Rizèl Scarlett</a>  
+            <time>Posted on Jun 7, 2023 • Updated on Jun 10, 2023</time>
+          </p>  
+          <p className="summary">Technical skill and content creation are equally important for your software development or career. Creating technical content can make it easier to land jobs, get promoted, and influence the direction of our industry because it enables hiring managers and other tech leaders to take a peek into your brain and your thought process.</p>
+        </div>
       </div>
       <div className="post">
-        <img src="https://media.dev.to/cdn-cgi/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fxtsjf89kaq9s9j35b7qf.png" alt=""></img>
-        <h2>How to write a technical blog post</h2>      
-        <p>Technical skill and content creation are equally important for your software development or career. Creating technical content can make it easier to land jobs, get promoted, and influence the direction of our industry because it enables hiring managers and other tech leaders to take a peek into your brain and your thought process.</p>
+        <div className="image">
+          <img src="https://techtowords.com/wp-content/uploads/2023/06/image-17.png" alt=""></img>
+        </div>
+        <div className="texts">
+          <h2>How to write a technical blog post</h2>    
+          <p className="info">
+            <a href="" className="author">Rizèl Scarlett</a>  
+            <time>Posted on Jun 7, 2023 • Updated on Jun 10, 2023</time>
+          </p>  
+          <p className="summary">Technical skill and content creation are equally important for your software development or career. Creating technical content can make it easier to land jobs, get promoted, and influence the direction of our industry because it enables hiring managers and other tech leaders to take a peek into your brain and your thought process.</p>
+        </div>
       </div>
+      
     </main>
   );
 }
+
+export default App;
