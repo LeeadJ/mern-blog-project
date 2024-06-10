@@ -1,4 +1,4 @@
-import Post from "../Post";
+import Post from "../Components/Post";
 
 export default function HomePage(){
     return (
