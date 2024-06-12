@@ -5,8 +5,12 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const PORT = 4000;
 
+// password hash:
+const bcrypt = require('bcryptjs');
+const salt = bcrypt.genSaltSync(10);
+
 //mw
-app.use(cors());
+app.use(cors()); 
 app.use(express.json()); //alows to extract request body as json
 
 // connect to the mongoose db:
@@ -17,7 +21,7 @@ app.post('/register', async (req, res) => {
     try{
         const userDoc = await User.create({
             username,
-            password
+            password: bcrypt.hashSync(password, salt),
         })
         res.json(userDoc);
     } catch(e) {
@@ -26,7 +30,7 @@ app.post('/register', async (req, res) => {
     
 })
 
-app.listen(PORT, console.log(`Server is running on port ${PORT}`));
+app.listen(PORT, console.log(`Server is running on port ${PORT}`)); 
 
 
 //SA1ZCrAag47Z3q13
