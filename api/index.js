@@ -32,7 +32,10 @@ app.post('/login', async (req, res) => {
             if(err){
                 throw err;
             }
-            res.cookie('token', token).json('ok');
+            res.cookie('token', token).json({
+                id: userDoc._id,
+                username,
+            });
         });
     }
     else{
@@ -43,7 +46,7 @@ app.post('/login', async (req, res) => {
 
 // LOGOUT endpoint:
 app.post('/logout', (req, res) => {
-    res.cookie('toke', '').json('ok');
+    res.cookie('token', '').json('ok');
 })
 
 // REGISTER endpoint
