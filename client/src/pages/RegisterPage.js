@@ -1,9 +1,10 @@
 import { useState } from "react"
+import { Navigate } from "react-router-dom"
 
 export default function RegisterPage(){
     const [username, setUsername] = useState('');
     const [password, setPassowrd] = useState('');
-    
+    const [redirect, setRedirect] = useState(false);
     const handleUserChange = (event) => {
         setUsername(event.target.value);
     }
@@ -21,9 +22,14 @@ export default function RegisterPage(){
         })
         if(response.status === 200){
             alert('Registration Successful');
+            setRedirect(true);
         } else {
             alert('Registration Failed');
         }
+    }
+
+    if(redirect){
+        return <Navigate to={'/'} />
     }
     return (
         <form className="register" onSubmit={register}>

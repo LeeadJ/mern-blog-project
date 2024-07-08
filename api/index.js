@@ -60,6 +60,7 @@ app.post('/register', async (req, res) => {
     }
 })
 
+// Endpoint to verify if user is logged in
 app.get('/profile', (req, res) => {
     const {token} = req.cookies;
     jwt.verify(token, secret, {}, (err, info) => {
@@ -68,7 +69,6 @@ app.get('/profile', (req, res) => {
         }
         res.json(info);
     })
-    res.json(req.cookies);
 })
 
 
