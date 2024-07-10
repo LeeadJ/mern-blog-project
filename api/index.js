@@ -118,6 +118,14 @@ app.get('/post', async (req,res) => {
     res.json(posts);
 })
 
+// Endpoint for post content:
+app.get('/post/:id', async (req,res) => {
+    const {id} = req.params;
+    const postDoc = await Post.findById(id)
+    .populate('author', ['username']);
+    res.json(postDoc)
+})
+
 
 
 app.listen(PORT, console.log(`Server is running on port ${PORT}`)); 

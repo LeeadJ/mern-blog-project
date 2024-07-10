@@ -27,8 +27,6 @@ export default function CreatePost() {
     const [files, setFiles] = useState('');
     const [redirect, setRedirect] = useState(false);
 
-    const defaultImage = '../public/defaultImg.jpeg'
-
     async function createNewPost(ev){
         const data = new FormData();
         data.set('title', title);
@@ -70,7 +68,7 @@ export default function CreatePost() {
                 type="file" 
                 onChange={ev => setFiles(ev.target.files)}
                 />
-            <ReactQuill 
+            <ReactQuill //converts string to html and vise versa
                 value={content} 
                 onChange={newValue => setContent(newValue)}
                 modules={modules} 
