@@ -19,9 +19,9 @@ const secret = 'sdfljkhsdfg767dsfgkjshdfg876dsajkhfgsd98g6ysd8f';
 
 // //mw
 app.use(cors({credentials: true, origin: 'http://localhost:3000'})); 
-app.use(express.json()); //alows to extract request body as json
+app.use(express.json()); //extract request body as json.
 app.use(cookieParser());
-
+app.use('/uploads', express.static(__dirname + '/uploads')); // serves static files from dir.
 // // connect to the mongoose db:
 mongoose.connect('mongodb+srv://leead123:SA1ZCrAag47Z3q13@cluster0.wlaow54.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
 
@@ -80,24 +80,43 @@ app.get('/profile', (req, res) => {
 });
 
 
-// Endpoint for new post:
+// Endpoint for creating a new post and adding to the db:
 app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
     const { originalname, path } = req.file;
+    
+    //fixing the file name extension
     const parts = originalname.split('.');
     const extension = parts[parts.length -1];
     const newPath = path+'.'+extension;
     fs.renameSync(path, newPath);
-    const { title, summary, content } = req.body;
-    const postDoc = await Post.create({
-        title, 
-        summary, 
-        content,
-        cover: newPath,
+    
+    // adding cookies to post in order to get user information (author)
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, async (err, info) => {
+        if(err){
+            throw err;
+        }
+        const { title, summary, content } = req.body;
+        const postDoc = await Post.create({
+            title, 
+            summary, 
+            content,
+            cover: newPath,
+            author: info.id,
+        })
+        res.json(postDoc);
     })
-
-
-    res.json(postDoc);
 });
+
+// Endpoint for fetching saved posts from the db:
+app.get('/post', async (req,res) => {
+    const posts = await Post.find()
+        .populate('author', ['username'])
+        .sort({createdAt: -1})
+        .limit(20);
+       
+    res.json(posts);
+})
 
 
 

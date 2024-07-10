@@ -27,6 +27,8 @@ export default function CreatePost() {
     const [files, setFiles] = useState('');
     const [redirect, setRedirect] = useState(false);
 
+    const defaultImage = '../public/defaultImg.jpeg'
+
     async function createNewPost(ev){
         const data = new FormData();
         data.set('title', title);
@@ -37,6 +39,7 @@ export default function CreatePost() {
         const response = await fetch('http://localhost:4000/post', {
             method: 'POST',
             body: data,
+            credentials: 'include',
         })
 
         if(response.ok) {
