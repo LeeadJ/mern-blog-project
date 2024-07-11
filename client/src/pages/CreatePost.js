@@ -2,22 +2,8 @@ import {useState} from 'react'
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css'
 import { Navigate } from 'react-router-dom';
-const modules = {
-    toolbar: [
-    [{ 'header': [1, 2, false] }],
-    ['bold', 'italic', 'underline','strike', 'blockquote'],
-    [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-    ['link', 'image'],
-    ['clean']
-    ]
-};
+import Editor from '../Editor';
 
-const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image'
-];
 
 
 export default function CreatePost() {
@@ -68,12 +54,7 @@ export default function CreatePost() {
                 type="file" 
                 onChange={ev => setFiles(ev.target.files)}
                 />
-            <ReactQuill //converts string to html and vise versa
-                value={content} 
-                onChange={newValue => setContent(newValue)}
-                modules={modules} 
-                formats={formats}
-                />
+            <Editor onChange={setContent} value={content}/>
             <button type='submit' style={{marginTop:'5px'}}>Create Post</button>
         </form>
     )

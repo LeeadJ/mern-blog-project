@@ -26,7 +26,7 @@ function Header() {
 
   return (
     <header>
-      <Link to="/" className="logo">MyBlog</Link>
+      <Link to="/" className="logo">LJ-TechBlog</Link>
       <nav>
         {userInfo?.username && ( 
           <>
