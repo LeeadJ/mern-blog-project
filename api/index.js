@@ -162,7 +162,37 @@ app.get('/post/:id', async (req,res) => {
     res.json(postDoc)
 })
 
+app.delete('/post/:id', async (req,res) => {
+    const postID = req.params.id;
+    try {
+        // Check if user allowed to delete post:
+        const { token } = req.cookies;
+        jwt.verify(token, secret, {}, async (err, info) => {
+            if(err) {
+                throw err;
+            }
 
+            // Finding the post by ID:
+            const postDoc = await Post.findById(postID);
+            if(!postDoc){
+                return res.status(404).json({message: 'Post not found'});
+            }
+            // check if current user is the author of the post:
+            const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
+            if(!isAuthor){
+                return res.status(400).json('you are not the author')
+            }
+            // Delete Post:
+            await Post.findByIdAndDelete(postID);
+            res.json({message: 'Post Deleted'});
+
+        })
+    }
+    catch (error){
+        console.error('Error deleting Post', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+})
 
 
 app.listen(PORT, console.log(`Server is running on port ${PORT}`)); 
