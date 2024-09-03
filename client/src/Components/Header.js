@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 
 function Header() {
   const {userInfo, setUserInfo} = useContext(UserContext)
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetch('http://localhost:4000/profile', {
@@ -20,6 +22,9 @@ function Header() {
     fetch('http://localhost:4000/logout', {
       credentials: 'include',
       method: 'POST',
+    }).then(() => {
+      setUserInfo(null);
+      navigate('/login')
     })
     setUserInfo(null);
   }
@@ -27,9 +32,9 @@ function Header() {
   const username = userInfo?.username;
   
   return (
-    <header>
+    <header className='header-bar'>
       <Link to="/" className="logo">LJ-TechBlog</Link>
-      <span className='hello-user'>Hello, {username}</span>
+      <span className='hello-user'>{username ? `Hello ${username}` : ''}</span>
       <nav>
         {username && ( 
           <>

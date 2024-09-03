@@ -14,7 +14,7 @@ const PORT = 4000;
 
 // // password hash:
 const bcrypt = require('bcryptjs');
-const salt = bcrypt.genSaltSync(10);
+const salt = bcrypt.genSaltSync(10); // salt - random hash added to password
 const secret = 'sdfljkhsdfg767dsfgkjshdfg876dsajkhfgsd98g6ysd8f';
 
 // //mw
@@ -57,9 +57,9 @@ app.post('/logout', (req, res) => {
 // REGISTER endpoint
 app.post('/register', async (req, res) => {    
     const {username, password} = req.body;
-    try{ 
+    try{ // register fails if username isn't unique. Added try catch to prevent crash
         const userDoc = await User.create({
-            username,
+            username, 
             password: bcrypt.hashSync(password, salt),
         })
         res.json(userDoc);
@@ -195,7 +195,7 @@ app.delete('/post/:id', async (req,res) => {
 })
 
 
-app.listen(PORT, console.log(`Server is running on port ${PORT}`)); 
+app.listen(PORT, console.log(`Server is running on port ${PORT}`));  
 
 
 // //SA1ZCrAag47Z3q13

@@ -17,11 +17,13 @@ main {
   margin: 0 auto;
 }
 
-header {
+.header-bar  {
+  background-color: rgb(222, 216, 221);
+  padding: 10px 30px;
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 5px;
   align-items: center;
 }
 
@@ -38,8 +40,6 @@ header a{
 .hello-user {
   font-weight: bold;
 }
-
-
 
 header nav {
   display: flex;

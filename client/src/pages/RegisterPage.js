@@ -43,7 +43,7 @@ export default function RegisterPage(){
                 alert('wrong creditials');
             }
         } else {
-            alert('Registration Failed');
+            alert('Registration Failed, must be valid email (i.e. someone@aaa.com)');
         }
     }
 
@@ -55,7 +55,7 @@ export default function RegisterPage(){
             <h1>Register</h1>
             <input 
                 type="text" 
-                placeholder="username" 
+                placeholder="john@email.com" 
                 value={username}
                 onChange={handleUserChange}
                 />
