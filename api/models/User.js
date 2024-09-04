@@ -4,11 +4,15 @@ const bcrypt = require('bcryptjs');
 
 // Defining the User Schema:
 const UserSchema = new Schema({
-    username: {
+    email: {
         type: String, 
         required: true, 
         unique: true, 
         match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ // email pattern
+    },
+    username: {
+        type: String,
+        required: true,
     },
     password: {
         type: String, 

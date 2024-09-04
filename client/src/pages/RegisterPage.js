@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom"
 import { UserContext } from "../UserContext";
 
 export default function RegisterPage(){
+    const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassowrd] = useState('');
     const [redirect, setRedirect] = useState(false);
@@ -20,7 +21,7 @@ export default function RegisterPage(){
         event.preventDefault();
         const response = await fetch('http://localhost:4000/register', {
             method: 'POST',
-            body: JSON.stringify({username, password}),
+            body: JSON.stringify({email, username, password}),
             headers: {'Content-Type' : 'application/json'}
         })
         if(response.status === 200){
@@ -29,7 +30,7 @@ export default function RegisterPage(){
             // after registering, automatically be redirected to homepage
             const response = await fetch('http://localhost:4000/login', {
                 method: 'POST',
-                body: JSON.stringify({username, password}),
+                body: JSON.stringify({email, password}),
                 headers: {'Content-Type' : 'application/json'},
                 credentials: 'include',
             });
@@ -53,9 +54,16 @@ export default function RegisterPage(){
     return (
         <form className="register" onSubmit={register}>
             <h1>Register</h1>
+            <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+            />
             <input 
                 type="text" 
-                placeholder="john@email.com" 
+                placeholder="username" 
                 value={username}
                 onChange={handleUserChange}
                 />

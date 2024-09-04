@@ -4,6 +4,7 @@ import { UserContext } from "../UserContext";
 
 
 export default function LoginPage(){
+    const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
@@ -21,7 +22,7 @@ export default function LoginPage(){
         event.preventDefault();
         const response = await fetch('http://localhost:4000/login', {
             method: 'POST',
-            body: JSON.stringify({username, password}),
+            body: JSON.stringify({email, password}),
             headers: {'Content-Type' : 'application/json'},
             credentials: 'include',
         });
@@ -43,12 +44,13 @@ export default function LoginPage(){
     return (
         <form className="login" onSubmit={login}>
             <h1>Login</h1>
-            <input 
-                type="text" 
-                placeholder="username"
-                value={username}
-                onChange={handleUserNameChange}
-                />
+            <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+            />
             <input 
                 type="password" 
                 placeholder="password"

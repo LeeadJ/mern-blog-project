@@ -27,25 +27,30 @@ mongoose.connect('mongodb+srv://leead123:SA1ZCrAag47Z3q13@cluster0.wlaow54.mongo
 
 // LOGIN endpoint:
 app.post('/login', async (req, res) => {
-    const {username, password} = req.body;
-    const userDoc = await User.findOne({username: username});
-    //comparing users password with the hashed password saved in the DB.
-    const passwordOK = bcrypt.compareSync(password, userDoc.password);
-    if(passwordOK){
-        // logged in
-        jwt.sign({username, id: userDoc._id}, secret, {}, (err, token) => {
-            if(err){
-                throw err;
-            }
-            res.cookie('token', token).json({
-                id: userDoc._id,
-                username,
+    const {email, password} = req.body;
+    const userDoc = await User.findOne({ email });
+    if(userDoc) {
+        //comparing users password with the hashed password saved in the DB.
+        const passwordOK = bcrypt.compareSync(password, userDoc.password);
+        if(passwordOK){
+            // logged in
+            jwt.sign({email, id: userDoc._id, username: userDoc.username }, secret, {}, (err, token) => {
+                if(err){
+                    throw err;
+                }
+                res.cookie('token', token).json({
+                    id: userDoc._id,
+                    username: userDoc.username,
+                });
             });
-        });
+        }
+        else{
+            res.status(400).json('wrong credintials!')
+        }
+    } else {
+        res.status(400).json('Wrong Credintials.');
     }
-    else{
-        res.status(400).json('wrong credintials!')
-    }
+    
 
 });
 
@@ -56,9 +61,10 @@ app.post('/logout', (req, res) => {
 
 // REGISTER endpoint
 app.post('/register', async (req, res) => {    
-    const {username, password} = req.body;
+    const {email, username, password} = req.body;
     try{ // register fails if username isn't unique. Added try catch to prevent crash
         const userDoc = await User.create({
+            email,
             username, 
             password: bcrypt.hashSync(password, salt),
         })
