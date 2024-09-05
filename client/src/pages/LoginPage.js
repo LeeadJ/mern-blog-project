@@ -5,18 +5,9 @@ import { UserContext } from "../UserContext";
 
 export default function LoginPage(){
     const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
     const {setUserInfo} = useContext(UserContext);
-
-    const handleUserNameChange = (event) => {
-        setUsername(event.target.value);
-    }
-
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    }
 
     async function login(event) {
         event.preventDefault();
@@ -48,14 +39,14 @@ export default function LoginPage(){
                 type="email"
                 placeholder="Email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(ev) => setEmail(ev.target.value)}
                 required
             />
             <input 
                 type="password" 
                 placeholder="password"
                 value={password}
-                onChange={handlePasswordChange}
+                onChange={(ev) => setPassword(ev.target.value)}
                 />
             <button>Login</button>
         </form>

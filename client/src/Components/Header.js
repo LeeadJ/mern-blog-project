@@ -18,6 +18,7 @@ function Header() {
     
   }, []);
 
+  // The logout function invalidates the cookie.
   function logout(){
     fetch('http://localhost:4000/logout', {
       credentials: 'include',
@@ -33,13 +34,13 @@ function Header() {
   
   return (
     <header className='header-bar'>
-      <Link to="/" className="logo">LJ-TechBlog</Link>
+      <Link to="/" className="logo">DailyTech</Link>
       <span className='hello-user'>{username ? `Hello ${username}` : ''}</span>
       <nav>
         {username && ( 
           <>
             <Link to="/create">Create New Post</Link>
-            <a onClick={logout}>Logout</a>
+            <Link to="/" onClick={logout}>Logout</Link>
           </>
         )}
         {!username && (

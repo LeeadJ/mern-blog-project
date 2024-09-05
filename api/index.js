@@ -9,21 +9,24 @@ const cookieParser = require('cookie-parser'); // handles cookie-based sessions 
 const multer = require('multer');
 const uploadMiddleware = multer({ dest: 'uploads/' })
 const fs = require('fs');
+require('dotenv').config();
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 // // password hash:
 const bcrypt = require('bcryptjs');
-const salt = bcrypt.genSaltSync(10); // salt - random hash added to password
-const secret = 'sdfljkhsdfg767dsfgkjshdfg876dsajkhfgsd98g6ysd8f';
+const saltRounds = parseInt(process.env.SALT_ROUNDS); // salt - random hash added to password
+const salt = bcrypt.genSaltSync(saltRounds);
+const secret = process.env.JWT_SECRET;
 
 // //mw
-app.use(cors({credentials: true, origin: 'http://localhost:3000'})); 
+app.use(cors({credentials: true, origin: 'http://localhost:3000'})); // for sending credentials between domains
 app.use(express.json()); //extract request body as json.
 app.use(cookieParser()); 
 app.use('/uploads', express.static(__dirname + '/uploads')); // serves static files from dir.
 // // connect to the mongoose db:
-mongoose.connect('mongodb+srv://leead123:SA1ZCrAag47Z3q13@cluster0.wlaow54.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+const mongoUrl = process.env.MONGO_URL;
+mongoose.connect(mongoUrl);
 
 // LOGIN endpoint:
 app.post('/login', async (req, res) => {
@@ -38,6 +41,7 @@ app.post('/login', async (req, res) => {
                 if(err){
                     throw err;
                 }
+                // save in the cookies for reuse
                 res.cookie('token', token).json({
                     id: userDoc._id,
                     username: userDoc.username,
@@ -76,12 +80,12 @@ app.post('/register', async (req, res) => {
 
 // Endpoint to verify if user is logged in:
 app.get('/profile', (req, res) => {
-    const {token} = req.cookies;
+    const { token } = req.cookies;
     jwt.verify(token, secret, {}, (err, info) => {
         if(err){
             throw err;
         }
-        res.json(info);
+        res.json(info); 
     })
 });
 
