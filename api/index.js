@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
+const cors = require('cors'); // for corss-origin sharing
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const Post = require('./models/Post')
-const jwt = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken'); // for user authenticaiton
+const cookieParser = require('cookie-parser'); // handles cookie-based sessions (extracts info from cookies).
 const multer = require('multer');
 const uploadMiddleware = multer({ dest: 'uploads/' })
 const fs = require('fs');
@@ -20,7 +20,7 @@ const secret = 'sdfljkhsdfg767dsfgkjshdfg876dsajkhfgsd98g6ysd8f';
 // //mw
 app.use(cors({credentials: true, origin: 'http://localhost:3000'})); 
 app.use(express.json()); //extract request body as json.
-app.use(cookieParser());
+app.use(cookieParser()); 
 app.use('/uploads', express.static(__dirname + '/uploads')); // serves static files from dir.
 // // connect to the mongoose db:
 mongoose.connect('mongodb+srv://leead123:SA1ZCrAag47Z3q13@cluster0.wlaow54.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');

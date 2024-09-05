@@ -6,19 +6,15 @@ export default function RegisterPage(){
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassowrd] = useState('');
+    const [confirmPassword, setConfirmPassowrd] = useState('');
     const [redirect, setRedirect] = useState(false);
     const {setUserInfo} = useContext(UserContext);
 
-    const handleUserChange = (event) => {
-        setUsername(event.target.value);
-    }
-
-    const handlePasswordChange = (event) => {
-        setPassowrd(event.target.value);
-    }
-
     async function register(event){
         event.preventDefault();
+        if(password !== confirmPassword){
+            return alert('Registration Failed. \nPasswords do not match, please try again.')
+        }
         const response = await fetch('http://localhost:4000/register', {
             method: 'POST',
             body: JSON.stringify({email, username, password}),
@@ -65,13 +61,19 @@ export default function RegisterPage(){
                 type="text" 
                 placeholder="username" 
                 value={username}
-                onChange={handleUserChange}
+                onChange={(ev) => setUsername(ev.target.value)}
                 />
             <input 
                 type="password" 
                 placeholder="password" 
                 value={password}
-                onChange={handlePasswordChange}
+                onChange={(ev) => setPassowrd(ev.target.value)}
+                />
+            <input 
+                type="password" 
+                placeholder="confirm - password" 
+                value={confirmPassword}
+                onChange={(ev) => setConfirmPassowrd(ev.target.value)}
                 />
             <button>Register</button>
         </form>
