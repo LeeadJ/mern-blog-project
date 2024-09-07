@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken'); // for user authenticaiton
 const bcrypt = require('bcryptjs');
-const cookieParser = require('cookie-parser');
 
 const secret = process.env.JWT_SECRET;
 const saltRounds = parseInt(process.env.SALT_ROUNDS);
