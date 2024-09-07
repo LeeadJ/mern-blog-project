@@ -35,7 +35,7 @@ export default function CreatePost() {
 
         if(response.ok) {
             const result = await response.json();
-            setRedirect(`/post/${result.id}`);
+            setRedirect(`/post/${result._id}`);
         }
     }
 
