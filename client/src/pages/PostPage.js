@@ -13,7 +13,7 @@ export default function PostPage(){
     
     const {id} = useParams(); 
     useEffect(() => {
-        fetch(`http://localhost:4000/post/${id}`)
+        fetch(`https://dailytech-backend.onrender.com/post/${id}`)
         .then(response => {
             response.json()
             .then(content => {
@@ -24,7 +24,7 @@ export default function PostPage(){
 
    
     async function handleDelete() {
-        await fetch(`http://localhost:4000/post/${id}`, {
+        await fetch(`https://dailytech-backend.onrender.com/post/${id}`, {
             method: 'DELETE',
             credentials: 'include',
         }).then(() => {
@@ -43,7 +43,7 @@ export default function PostPage(){
     return (
         <div className="post-page">
             <div className="image">
-                <img src={`http://localhost:4000/${postContent.cover}`} alt=""></img>
+                <img src={`https://dailytech-backend.onrender.com/${postContent.cover}`} alt=""></img>
             </div>
             {userInfo.id === postContent.author._id && (
                 <div className="edit-row">

@@ -8,7 +8,7 @@ function Header() {
 
 
   useEffect(() => {
-    fetch('http://localhost:4000/auth/profile', {
+    fetch('https://dailytech-backend.onrender.com/auth/profile', {
       credentials: 'include',
     }).then(response => {
       response.json().then(userInfo => {
@@ -20,7 +20,7 @@ function Header() {
 
   // The logout function invalidates the cookie.
   function logout(){
-    fetch('http://localhost:4000/auth/logout', {
+    fetch('https://dailytech-backend.onrender.com/auth/logout', {
       credentials: 'include',
       method: 'POST',
     }).then(() => {

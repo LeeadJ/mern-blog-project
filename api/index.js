@@ -9,7 +9,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 
 // //mw
-app.use(cors({credentials: true, origin: 'http://localhost:3000'})); // for sending credentials between domains
+app.use(cors({origin: '*', credentials: true })); // for sending credentials between domains
 app.use(express.json()); //extract request body as json.
 app.use(cookieParser()); 
 app.use('/uploads', express.static(__dirname + '/uploads')); // serves static files from dir.
