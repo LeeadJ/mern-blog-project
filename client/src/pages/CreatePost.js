@@ -10,16 +10,23 @@ export default function CreatePost() {
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
     const [content, setContent] = useState('');
-    const [files, setFiles] = useState('');
-    const [redirect, setRedirect] = useState(false);
+    const [files, setFiles] = useState(null);
+    const [redirect, setRedirect] = useState(null);
 
     async function createNewPost(ev){
+        ev.preventDefault();
+
+        if (!files || files.length === 0) {
+            alert("Please add a file before submitting the post.");
+            return;  
+        }
+        
         const data = new FormData();
         data.set('title', title);
         data.set('summary', summary);
         data.set('content', content);
         data.set('file', files[0]);
-        ev.preventDefault();
+        
         const response = await fetch('http://localhost:4000/post', {
             method: 'POST',
             body: data,
@@ -27,13 +34,13 @@ export default function CreatePost() {
         })
 
         if(response.ok) {
-            setRedirect(true);
+            const result = await response.json();
+            setRedirect(`/post/${result.id}`);
         }
-        // console.log(await response.json());
     }
 
     if(redirect){
-        return <Navigate to={'/'}/>
+        return <Navigate to={redirect}/>
     }
 
     return (
