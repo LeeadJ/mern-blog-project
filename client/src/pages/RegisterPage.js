@@ -15,7 +15,7 @@ export default function RegisterPage(){
         if(password !== confirmPassword){
             return alert('Registration Failed. \nPasswords do not match, please try again.')
         }
-        const response = await fetch('http://localhost:4000/auth/register', {
+        const response = await fetch('https://proj-api-fkij.onrender.com/auth/register', {
             method: 'POST',
             body: JSON.stringify({email, username, password}),
             headers: {'Content-Type' : 'application/json'}
@@ -24,7 +24,7 @@ export default function RegisterPage(){
             alert('Registration Successful');
 
             // after registering, automatically be redirected to homepage
-            const response = await fetch('http://localhost:4000/auth/login', {
+            const response = await fetch('https://proj-api-fkij.onrender.com/auth/login', {
                 method: 'POST',
                 body: JSON.stringify({email, password}),
                 headers: {'Content-Type' : 'application/json'},
