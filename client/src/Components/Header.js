@@ -34,9 +34,12 @@ function Header() {
   
   return (
     <header className='header-bar'>
-      <Link to="/" className="logo">DailyTech</Link>
-      <span className='hello-user'>{username ? `Hello ${username}` : ''}</span>
-      <nav>
+      <div className='logo-container'>
+        <img src='/ryan.jpeg' alt='logo' className='logo-image'/>
+        <Link to="/" className="logo">Remembering Ryan</Link>
+      </div>
+      <span className='hello-user'>{username ? `Hello, ${username}.` : ''}</span>
+      <nav className='links'>
         {username && ( 
           <>
             <Link to="/create">Create Post</Link>
