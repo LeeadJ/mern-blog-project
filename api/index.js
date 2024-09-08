@@ -10,6 +10,12 @@ const postRoutes = require('./routes/postRoutes');
 
 const PORT = process.env.PORT;
 
+// cors
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true
+}
+
 // //middleware
 app.use(cors({credentials: true, origin: 'http://localhost:3000'})); // for sending credentials between domains
 app.use(express.json()); //extract request body as json.
