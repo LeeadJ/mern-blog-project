@@ -21,7 +21,9 @@ const userSchema = new Schema({
         type: Date,
         default: new Date(),
     },
-})
+}, {
+    timestamps: true
+});
 
 
 // Creating the Model

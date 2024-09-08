@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
 const jwt = require('jsonwebtoken');
-const multer = require('multer');
+const multer = require('multer'); // for handeling form data
 const fs = require('fs');
 const path = require('path');
 

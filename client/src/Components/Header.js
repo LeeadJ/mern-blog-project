@@ -39,7 +39,7 @@ function Header() {
       <nav>
         {username && ( 
           <>
-            <Link to="/create">Create New Post</Link>
+            <Link to="/create">Create Post</Link>
             <Link to="/" onClick={logout}>Logout</Link>
           </>
         )}

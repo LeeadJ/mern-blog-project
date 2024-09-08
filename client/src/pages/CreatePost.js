@@ -1,6 +1,5 @@
 import {useState} from 'react' 
-import ReactQuill from "react-quill";
-import 'react-quill/dist/quill.snow.css'
+import 'react-quill/dist/quill.snow.css' //styling for the reactquill test editor
 import { Navigate } from 'react-router-dom';
 import Editor from '../Editor';
 

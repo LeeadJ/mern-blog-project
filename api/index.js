@@ -1,28 +1,24 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors'); // for corss-origin sharing
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser'); // handles cookie-based sessions (extracts info from cookies).
+const authRoutes = require('./routes/authRoutes');
+const postRoutes = require('./routes/postRoutes');
 
-require('dotenv').config();
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 
-// //mw
+// //middleware
 app.use(cors({credentials: true, origin: 'http://localhost:3000'})); // for sending credentials between domains
 app.use(express.json()); //extract request body as json.
 app.use(cookieParser()); 
 app.use('/uploads', express.static(__dirname + '/uploads')); // serves static files from dir.
 
-
 // // connect to the mongoose db:
 const mongoUrl = process.env.MONGO_URL;
 mongoose.connect(mongoUrl);
-
-
-// Import routes
-const authRoutes = require('./routes/authRoutes');
-const postRoutes = require('./routes/postRoutes');
 
 // Use routes
 app.use('/auth', authRoutes);
