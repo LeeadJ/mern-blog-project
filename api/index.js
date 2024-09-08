@@ -2,6 +2,14 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors'); // for corss-origin sharing
+// cors
+const corsOptions = {
+  origin: 'https://frontend-proj-7zgz.onrender.com',
+  credentials: true
+}
+
+// //middleware
+app.use(cors(corsOptions)); // for sending credentials between domains
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser'); // handles cookie-based sessions (extracts info from cookies).
 const authRoutes = require('./routes/authRoutes');
@@ -10,14 +18,7 @@ const postRoutes = require('./routes/postRoutes');
 
 const PORT = process.env.PORT;
 
-// cors
-const corsOptions = {
-  origin: 'https://frontend-proj-7zgz.onrender.com',
-  credentials: true
-}
 
-// //middleware
-app.use(cors({credentials: true, origin: 'https://frontend-proj-7zgz.onrender.com'})); // for sending credentials between domains
 app.use(express.json()); //extract request body as json.
 app.use(cookieParser()); 
 app.use('/uploads', express.static(__dirname + '/uploads')); // serves static files from dir.
@@ -33,6 +34,12 @@ app.use('/post', postRoutes);
 // Server test
 app.get('/', (req, res) => {
   res.status(200).json("Welcome to the server!");
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Something went wrong!' });
 });
 
 app.listen(PORT, console.log(`Server is running on port ${PORT}`));  
