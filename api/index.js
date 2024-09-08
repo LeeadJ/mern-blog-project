@@ -12,12 +12,12 @@ const PORT = process.env.PORT;
 
 // cors
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://frontend-proj-7zgz.onrender.com',
   credentials: true
 }
 
 // //middleware
-app.use(cors({credentials: true, origin: 'http://localhost:3000'})); // for sending credentials between domains
+app.use(cors({credentials: true, origin: 'https://frontend-proj-7zgz.onrender.com'})); // for sending credentials between domains
 app.use(express.json()); //extract request body as json.
 app.use(cookieParser()); 
 app.use('/uploads', express.static(__dirname + '/uploads')); // serves static files from dir.

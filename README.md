@@ -33,7 +33,7 @@ This project implements a MERN stack-based blogging platform where users can reg
    - MongoDB Atlas is used as the database. Ensure you have a valid connection string in `api/index.js`.
 
 4. **Usage:**
-   - Open your browser and go to `http://localhost:3000` to view the application.
+   - Open your browser and go to `https://frontend-proj-7zgz.onrender.com` to view the application.
 
 ## Technologies Used
 
